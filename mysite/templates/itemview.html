@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+      <section class="mb-">
+        <div class="row wow fadeIn">
+          <div class='col-6 offset-3'>
+            <form action="/create-item/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>
+                        {{message}}
+                    </li>
+                {% endfor%}
+                </ul>
+                {% endif%}
+                <div class="col-md-12">
+                    <input class="form-control" name="title" type="text" placeholder="Name of Item">
+
+                    <input class="form-control" name="price" type="number" placeholder="Price">
+                    <input class="form-control" name="discount_price" type="number" placeholder="Discount Price">
+                    <select style="display:block !important;" class="form-control" name="category">
+                        <option value="">Choose Category</option>
+                        <option value="1">Food and Beverage</option>
+                        <option value="2">Artisans</option>
+                        <option value="3">Art Work</option>
+                        <option value="4">Foot Wear</option>
+                        <option value="5">Drugs</option>
+                        <option value="6">Fashion'</option>
+                    </select>
+                    <select style="display:block !important;" class="form-control" name="label">
+                        <option value="">Choose Lable</option>
+                        <option value="1">primary</option>
+                        <option value="2">secondary</option>
+                        <option value="3">danger</option>
+                    </select>
+                    <input class="form-control" name="slug" type="text" placeholder="Slug">
+                    <textarea class="form-control" name="description" type="text" placeholder="Description"></textarea>
+                    <textarea class="form-control" name="detail" type="text" placeholder="Details"></textarea>
+                    <input class="form-control" name="location" type="text" placeholder="Location">
+                    <input class="form-control" name="image" type="file" placeholder="Item Image">
+                    <input class="btn btn-primary" type="submit" value="Create">
+                </div>
+            </form>
+          </div>
+        </div>
+    </form>
+      </section>
+</div>
+{% endblock content %}

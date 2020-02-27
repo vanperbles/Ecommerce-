@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+    <div class="container">
+        <section class="mb-4">
+            <div class="row wow fadeIn">
+                <div class='col-6 offset-3'>
+                    <h1>User Status</h1>
+                    <p>This is a one time opportunity for you to be register as Manufacturer</p>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#centralModalSm" type="submit" value="Create">Create
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Central Modal Small -->
+<div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog modal-sm" role="document">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">User Status</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                This is a one time notice. <br>Choose whether you are are <br>User or Manufacture
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">User</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="SaveManufacturer()">Manufacture</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Central Modal Small -->
+<script>
+function SaveManufacturer(){
+            var url = window.location.origin +"/permit-user/";
+            const data = {
+                username:"{{user.username}}"
+            }
+            const http = new XMLHttpRequest();
+                http.open('POST', url);
+                http.setRequestHeader('Content-type', 'application/json');
+                // http.setRequestHeader('Authentication','id_token');
+                http.send(JSON.stringify(data)); // Make sure to stringify
+                http.onload = function() {
+                state = true;
+                var resp = http.responseText;
+                var json_resp = JSON.parse(resp);
+                // You can now use the response for what you want
+                if(json_resp['success']){
+                   window.location.href = window.location.origin;
+                }
+                console.log(json_resp)
+                }
+            }
+
+</script>
+{% endblock content %}

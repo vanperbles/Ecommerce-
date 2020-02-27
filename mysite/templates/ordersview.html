@@ -1,0 +1,123 @@
+{% extends "base.html"%}
+
+{% block content%}
+
+<main>
+     <!-- Main Container -->
+    <div class="container">
+
+      <section class="section my-5 pb-5">
+
+        <!-- Shopping Cart table -->
+        <div class="table-responsive">
+
+          <table class="table product-table">
+
+            <!-- Table head -->
+            <thead>
+              <tr>
+                <th></th>
+                <th class="font-weight-bold">
+                  <strong>Product</strong>
+                </th>
+                <th></th>
+                <th class="font-weight-bold">
+                  <strong>Price</strong>
+                </th>
+                <th class="font-weight-bold">
+                  <strong>QTY</strong>
+                </th>
+                <th class="font-weight-bold">
+                  <strong>Amount</strong>
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <!-- /.Table head -->
+
+            <!-- Table body -->
+            <tbody>
+            {% for order_item in object.items.all %}
+
+              <!-- First row -->
+              <tr>
+                <th scope="row">
+                  <img src="{{order_item.item.image.url}}"width="100"height="100" alt="" class="img-fluid z-depth-0">
+                </th>
+                <td>
+                  <h5 class="mt-3">
+                    <strong>{{ order_item.item.title }}</strong>
+                  </h5>
+                </td>
+
+                <td></td>
+                <td>GH {{ order_item.item.price }}</td>
+                <td class="text-center text-md-left">
+                  <a href="{% url 'shop:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                    {{ order_item.quantity }}
+                  <a href="{% url 'shop:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
+                </td>
+                <td class="font-weight-bold">
+                  <strong>GH {{ order_item.get_total_item_price }}</strong>
+                </td>
+              <td>
+                  <a href="{% url 'shop:remove-from-cart' order_item.item.slug %}" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Remove item">X
+                  </a>
+                </td>
+              </tr>
+            {% empty %}
+        <tr>
+            <td colspan='5'>Your cart is empty</td>
+        </tr>
+
+
+              <!-- /.First row -->
+
+            {% endfor %}
+             <tr>
+                <td colspan="3"></td>
+                <td>
+                  <h4 class="mt-2">
+                    <strong>Total</strong>
+                  </h4>
+                </td>
+                <td class="text-right">
+                  <h4 class="mt-2">
+                    <strong>GH {{object.get_total}}</strong>
+                  </h4>
+                </td>
+                <td colspan="3" class="text-right">
+                  <a href="{% url 'shop:checkout'%}">
+                  <button type="button" class="btn btn-primary btn-rounded">Complete purchase
+                    <i class="fas fa-angle-right right"></i>
+                  </button>
+                  </a>
+                  <button type="button" class="btn btn-primary btn-rounded">Continue shopping
+                    <i class="fas fa-angle-right right"></i>
+                  </button>
+                </td>
+
+              </tr>
+
+            <div>
+
+            </div>
+              <!-- Fourth row -->
+
+
+
+            </tbody>
+            <!-- /.Table body -->
+
+          </table>
+
+        </div>
+        <!-- Shopping Cart table -->
+
+      </section>
+
+    </div>
+    <!-- /Main Container -->
+</main>
+
+{% endblock content%}
