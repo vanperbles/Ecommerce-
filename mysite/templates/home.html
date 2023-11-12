@@ -1,0 +1,423 @@
+{% extends 'base.html' %}
+{% load cart_template_tags %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+<body class="homepage-v2 hidden-sn white-skin animated">
+
+
+<!-- Mega menu -->
+<div class="container mt-2 pt-2">
+    <!--Carousel Wrapper-->
+    <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+        <!--Indicators-->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-2" data-slide-to="1"></li>
+            <li data-target="#carousel-example-2" data-slide-to="2"></li>
+        </ol>
+        <!--/.Indicators-->
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <div class="view">
+                    
+
+                    <img class="d-block w-100" src="https://impakter.com/wp-content/uploads/2019/03/IMG_1834.jpe"
+                         height="400" width="1000" alt="First slide">
+                    <div class="mask rgba-black-light"></div>
+                </div>
+                <div class="carousel-caption">
+                    <h2 class="h3-responsive">Made In Ghana Product</h2>
+                    <p> Chocolate</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view">
+                    <img class="d-block w-100" src="{% static 'Ecommerce/img/holandia.jpg' %}"
+                         height="400" width="1000" alt="Second slide">
+                    <div class="mask rgba-black-strong"></div>
+                </div>
+                <div class="carousel-caption">
+                    <h3 class="h3-responsive">Made In Ghana Product</h3>
+                    <p>Ghanaian way of life</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <!--Mask color-->
+                <div class="view">
+                    <img class="d-block w-100" src="{% static 'Ecommerce/img/mad-in-gana.png' %}"
+                         height="400" width="1000" alt="Third slide">
+                    <div class="mask rgba-black-slight"></div>
+                </div>
+                <div class="carousel-caption">
+                    <h2 class="h3-responsive">Made In Ghana Product</h2>
+                    <p>Fashion</p>
+                </div>
+            </div>
+        </div>
+        <!--/.Slides-->
+        <!--Controls-->
+        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <!--/.Controls-->
+    </div>
+    <!--/.Carousel Wrapper-->
+
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color mt-5">
+
+        <!-- Navbar brand -->
+        <a class="font-weight-bold white-text mr-4" href="#">Items</a>
+        <!-- Search form -->
+        <form class="form-inline active-cyan-3 active-cyan-4">
+            <i class="fas fa-search" onclick="searchApi()" aria-hidden="true"></i>
+            <input class="form-control form-control-sm ml-3 w-75" id="searchitem" type="text" placeholder="Search"
+                   aria-label="Search">
+        </form>
+<!--        &lt;!&ndash; Search form &ndash;&gt;-->
+<!--        <div class="active-purple-3 active-purple-4 mb-4">-->
+<!--            <input  class="form-control" id="searchitem" type="text" placeholder="Search" aria-label="Search">-->
+<!--        </div>-->
+<!--        <button onclick="searchApi()">Search</button>-->
+<!--        &lt;!&ndash; Search form &ndash;&gt;-->
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+                aria-controls="navbarSupportedContent1"
+                aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+    </nav>
+    <!--/.Navbar-->
+
+</div>
+<!-- Mega menu -->
+
+<!-- /.Main Container -->
+<div class="container">
+
+    <!-- Grid row -->
+    <div class="row pt-4">
+
+        <!-- Content -->
+        <div class="col-lg-12">
+
+            <!-- Section: Intro -->
+
+
+            <!--Section: Products-->
+            <section>
+
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-12">
+
+                        <!-- Grid row -->
+                        <div class="row" id="items">
+
+                            <!--Grid column-->
+                            {% for item in object_list %}
+                            <div class="col-lg-4 col-md-12 mb-4">
+
+                                <!--Card-->
+                                <div class="card card-ecommerce" style="width:19rem; height:420px">
+
+                                    <!--Card image-->
+                                    <div class="view overlay">
+                                        <img src="{{item.image.url}}" height="300px" width="350px" class="img-fluid">
+                                        <a href="{{ item.get_absolute_url }}">
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
+                                    </div>
+                                    <!--Card image-->
+
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Category & Title-->
+
+                                        <h5 class="card-title mb-1"><strong><a href="{{item.get_absolute_url}}"
+                                                                               class="dark-grey-text">{{item.title}}</a></strong>
+                                        </h5>
+                                        <span class="badge badge-pill {{item.get_label_display}}-color mb-2">New</span>
+                                        <!-- Rating -->
+                                        <ul class="rating">
+                                            <li><i class="fas fa-star blue-text"></i></li>
+                                            <li><i class="fas fa-star blue-text"></i></li>
+                                            <li><i class="fas fa-star blue-text"></i></li>
+                                            <li><i class="fas fa-star blue-text"></i></li>
+                                            <li><i class="fas fa-star blue-text"></i></li>
+                                        </ul>
+
+                                        <!--Card footer-->
+                                        <div class="card-footer pb-0">
+                                            <div class="row mb-0">
+                                                    <span class="float-left"><strong>GH
+                                                            {% if item.discount_price %}
+                                                            {{ item.discount_price }}
+                                                            {% else %}
+                                                            {{ item.price }}
+                                                            {% endif %}</strong></span>
+                                                <span class="float-right">
+                                                        <a class="" data-toggle="tooltip" data-placement="top"
+                                                           title="Add to Cart"><i class="fas fa-shopping-cart ml-3"></i></a>
+                                                        </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--Card content-->
+
+                                </div>
+                                <!--Card-->
+
+
+                            </div>
+                            {% endfor %}
+                            <!--Grid column-->
+                            {% if is_paginated %}
+                            <nav class="d-flex justify-content-center wow fadeIn">
+                                <ul class="pagination pg-blue">
+
+                                    {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+
+                                    <li class="page-item active">
+                                        <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+                                            <span class="sr-only">(current)</span>
+                                        </a>
+                                    </li>
+
+                                    {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                            {% endif %}
+
+
+                        </div>
+                        <!--Grid row-->
+
+
+                    </div>
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Products-->
+
+            <!--Section: Advertising-->
+            <section>
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-12">
+                        <!--Image -->
+                        <div class="view  z-depth-1">
+                            <img src="{% static 'Ecommerce/img/holandia.jpg' %}"
+                                 class="img-fluid"
+                                 height="250" width="100%%"
+                                 alt="sample image">
+                            <div class="mask rgba-stylish-slight">
+                                <div class="dark-grey-text text-right pt-lg-5 pt-md-1 mr-5 pr-md-4 pr-0">
+                                    <div>
+                                        <a>
+                                            <span class="badge badge-primary">SALE</span>
+                                        </a>
+                                        <h3 class="card-title font-weight-bold pt-md-3 pt-1">
+                                            <strong>This is the time to purchase all your Ghanaian product
+                                            </strong>
+                                        </h3>
+                                        <p class="pb-lg-3 pb-md-1 clearfix d-none d-md-block">Ghanaian products the
+                                            future is bright. </p>
+                                        <a class="btn mr-0 btn-primary btn-rounded clearfix d-none d-md-inline-block">Read
+                                            more</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--Image -->
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+                <!-- Grid row -->
+                <div class="row mt-4 pt-1">
+
+                    <!--Grid column-->
+                    <div class="col-lg-8 col-md-12 mb-3 mb-md-4 pb-lg-2">
+                        <!--Image -->
+                        <div class="view zoom z-depth-1">
+                            <img src="{% static 'Ecommerce/img/ghana.jpg' %}"
+                                 class="img-fluid"
+                                 alt="sample image">
+                            <div class="mask rgba-white-light">
+                                <div class="dark-grey-text d-flex align-items-center pt-4 ml-lg-3 pl-lg-3 pl-md-5">
+                                    <div>
+                                        <a><span class="badge badge-danger"></span></a>
+                                        <h2 class="card-title font-weight-bold pt-2"><strong></strong>
+                                        </h2>
+                                        <p class="hidden show-ud-up"></p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--Image -->
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <!--Image -->
+                        <div class="view zoom z-depth-1 photo">
+                            <img src="{% static 'Ecommerce/img/ghana-logo.webp' %}"
+                                 class="img-fluid"
+                                 height="600" width="350"
+                                 alt="sample image">
+                            <div class="mask rgba-stylish-strong">
+                                <div class="white-text center-elem text-center w-75">
+                                    <div class="">
+                                        <a><span class="badge badge-info"></span></a>
+                                        <h2 class="card-title font-weight-bold pt-2"><strong>Local Products</strong>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--Image -->
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Advertising-->
+
+
+            <!--Section: product list-->
+
+
+        </div>
+        <!-- /.Content -->
+
+    </div>
+    <!-- Grid row -->
+
+</div>
+<!-- /.Main Container -->
+
+<script>
+function searchApi(){
+     var items = document.getElementById('items')
+items.innerHTML = `searching...`
+                var words = document.getElementById("searchitem").value
+                if (words === "" || words === " "){
+                alert("please enter item")
+                }else{
+            var url = window.location.origin +"/search/";
+
+
+
+            const data = {q:words}
+            const http = new XMLHttpRequest();
+                http.open('POST', url);
+                http.setRequestHeader('Content-type', 'application/json');
+                // http.setRequestHeader('Authentication','id_token');
+                http.send(JSON.stringify(data)); // Make sure to stringify
+                http.onload = function() {
+                state = true;
+                var resp = http.responseText;
+                var json_resp = JSON.parse(resp);
+                // You can now use the response for what you want
+                if(json_resp['success']){
+                    // look for id of element that will hold the results and append to it
+                    // objects received from calling api
+
+                    if (json_resp['objects'].length > 0){
+                    items.innerHTML = ""
+                    for (var i=0;i<json_resp['objects'].length;i++){
+                        var obj = json_resp['objects'][i]
+                    items.innerHTML += `<div class="col-lg-4 col-md-12 mb-4">
+<div class="card card-ecommerce" style="width:19rem; height:420px">
+    <div class="view overlay">
+        <img src="`+obj['image']+`" height="300px" width="350px" class="img-fluid">
+        <a href="`+obj['url']+`">
+            <div class="mask rgba-white-slight"></div>
+        </a>
+    </div>
+    <div class="card-body">
+
+        <h5 class="card-title mb-1"><strong><a href="`+obj['url']+`" class="dark-grey-text">`+obj['title']+`</a></strong>
+        </h5>
+        <!-- Rating -->
+        <ul class="rating">
+            <li><i class="fas fa-star blue-text"></i></li>
+            <li><i class="fas fa-star blue-text"></i></li>
+            <li><i class="fas fa-star blue-text"></i></li>
+            <li><i class="fas fa-star blue-text"></i></li>
+            <li><i class="fas fa-star blue-text"></i></li>
+        </ul>
+        <div class="card-footer pb-0">
+            <div class="row mb-0">
+                    <span class="float-left"><strong>GHC `+obj['price']+`</strong></span>
+                <span class="float-right">
+                        <a class="" data-toggle="tooltip" data-placement="top"
+                           title="Add to Cart"><i class="fas fa-shopping-cart ml-3"></i></a>
+                        </span>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>`
+                    }
+                    }else{
+                    items.innerHTML = "No items founds"
+                    }
+
+                }
+                console.log(json_resp)
+                }
+                }
+            }
+</script>
+</body>
+{% endblock content %}
+
+

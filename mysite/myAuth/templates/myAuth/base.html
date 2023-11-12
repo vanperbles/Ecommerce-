@@ -1,0 +1,83 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/all.min.css' %}" rel="stylesheet">
+
+
+
+
+  <title>{% block head_title %}{% endblock %}</title>
+  {% block extra_head %}
+  {% endblock %}
+</head>
+<body>
+
+{% comment %} ############################# Head Area ######################################### {% endcomment %}
+
+<header>
+  
+  <img class="logo_img" src="{%static 'images/perbles_logo_black.png'%}" alt="perbles logo">
+  <nav>
+    <ul class="nav_links">
+      <li><a href="#">Home</a>
+      <li><a class="dropdown-toggle" href="#">Categories </a>
+      <li><a href="#">About Us<i class="fa-solid fa-user"></i></a>
+      <li><a href="#">Contact</a>
+    </ul>
+  </nav>
+  <div class="side-nav">
+    <a href="#"><i class="fa-solid fa-search"></i>Search</a>
+    <a href="#"><i class="fa-solid fa-cart-shopping"></i>Cart(0)</a>
+    
+    <div class="dropdown">
+      <button class="dropbtn"><a href="#"><i class="fa-solid fa-list"></i></a></button>
+      <div class="dropdown-content">
+      <a href="{%url 'myAuth:register'%}">Register</a>
+      <a href="{%url 'myAuth:login'%}">Login</a>
+      
+      </div>
+    </div>
+
+    
+  </div>
+  
+
+</header>
+
+
+
+
+
+{% comment %} ############################# End Head Area ######################################### {% endcomment %}
+
+
+<!--# Checking how messages are handeled-->
+        <div class="container mt-1 pt-1">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} Whalert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+         {%block content%}
+        {%endblock content%}
+
+
+
+<script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+
+</body>
